@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:get/get.dart';
 
+import '../utils/colors.dart';
+
 class ItemCard extends StatefulWidget {
   final Item item;
   final int index;
@@ -17,13 +19,11 @@ class ItemCard extends StatefulWidget {
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size.width * 0.03;
-    final sizeText = MediaQuery.of(context).size.width * 0.045;
-    return Container(
+     return Container(
       width: double.maxFinite,
-      height: 350,
+      height: 320,
       decoration: BoxDecoration(
-          color: const Color.fromARGB(35, 255, 161, 236),
+          
           borderRadius: BorderRadius.circular(10)),
       child: Column(children: [
         Stack(children: [
@@ -47,10 +47,10 @@ class _ItemCardState extends State<ItemCard> {
                 },
                 child: CircleAvatar(
                   radius: 15,
-                  backgroundColor:widget.item.isfavorite?Colors.green: Colors.white,
+                  backgroundColor: Colors.white,
                   child: Icon(
                     Icons.favorite,
-                    color: widget.item.isfavorite ? Colors.red : Colors.grey,
+                    color: widget.item.isfavorite ?mainColor: Colors.grey,
                   ),
                 ),
               ))
@@ -63,7 +63,7 @@ class _ItemCardState extends State<ItemCard> {
             Expanded(
               child: Container(
                 alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.all(size),
+                padding: EdgeInsets.all(8),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -75,16 +75,16 @@ class _ItemCardState extends State<ItemCard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      Row(crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 40,
                             child: Text(
                               widget.item.name,
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: sizeText,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),

@@ -11,6 +11,7 @@ class MyController extends GetxController {
   Rx<TextEditingController> searchcontroller = TextEditingController().obs;
   Rx<TextEditingController> mesgcontroller = TextEditingController().obs;
   RxBool isListening= false.obs;
+  RxBool isTaped= true.obs;
   @override
   void onInit() {
     super.onInit();
@@ -39,7 +40,7 @@ class MyController extends GetxController {
         price: '3.00',
         imgUrl: 'assets/burger2.jpg',
         slug: 'burger',
-        isfavorite: true,
+        isfavorite: false,
       ),
       Item(
         itemId: '2',
@@ -50,7 +51,7 @@ class MyController extends GetxController {
         price: '2.60',
         imgUrl: 'assets/pizza1.jpg',
         slug: 'burger',
-        isfavorite: true,
+        isfavorite: false,
       ),
       Item(
         itemId: '2',
@@ -129,12 +130,9 @@ class MyController extends GetxController {
       updateFavIcon(index, val);
     };
 
-      print('KKKKKKKKKKKK isfvec ${items.value[index].isfavorite}');
-      print('KKKKKKKKKKKK name ${items.value[index].name}');
-      print('KKKKKKKKKKKK  id ${items.value[index].itemId}');
-      print('KKKKKKKKKKKK va; ${val}');
+     
   }
   void vibrateOnSplashScreen() async{
-    Vibration.vibrate(duration: 100);
+    Vibration.vibrate(duration: 1000);
   }
 }

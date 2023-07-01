@@ -15,7 +15,7 @@ class Header extends StatelessWidget {
         CircleAvatar(
           radius: 22,
           backgroundColor: Color.fromARGB(170, 226, 226, 226),
-          child: Icon(Icons.more_horiz),
+          child: Icon(Icons.more_horiz,color: Colors.grey,),
         ),
       ],
     );
