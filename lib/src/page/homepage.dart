@@ -160,7 +160,7 @@ class HomePage extends GetView<MyController> {
       itemCount: controller.items.value.length,
       itemBuilder: (context, index) {
         final ite = controller.items.value[index];
-        return ItemCard(item: ite, index: index,   onUpdateFaver:    controller.updateFavIcon(index, ite.isfavorite));
+        return ItemCard(item: ite, index: index);
 
 
       },

@@ -5,12 +5,16 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:get/get.dart';
 
-class ItemCard extends GetView<MyController>{
+class ItemCard extends StatefulWidget {
   final Item item;
   final int index;
-  final Function onUpdateFaver;
-  const ItemCard(  {super.key, required this.item,required this.index,required this.onUpdateFaver,});
+  const ItemCard({Key? key, required this.item, required this.index}) : super(key: key);
 
+  @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width * 0.03;
@@ -29,19 +33,24 @@ class ItemCard extends GetView<MyController>{
                   borderRadius: BorderRadius.circular(10.0),
                   child: Container(
                       decoration: const BoxDecoration(),
-                      child: Image.asset(item.imgUrl)))),
+                      child: Image.asset(widget.item.imgUrl)))),
           Positioned(
               top: 10,
               right: 10,
               child: InkWell(
                 // print('${controller.items.value[index].isfavorite}');
-                onTap:()=>onUpdateFaver,
+                onTap:(){
+                  setState(() {
+                    widget.item.isfavorite =!widget.item.isfavorite;
+
+                  });
+                },
                 child: CircleAvatar(
                   radius: 15,
-                  backgroundColor: item.isfavorite?Colors.green: Colors.white,
+                  backgroundColor:widget.item.isfavorite?Colors.green: Colors.white,
                   child: Icon(
                     Icons.favorite,
-                    color: controller.items.value[index].isfavorite ? Colors.red : Colors.grey,
+                    color: widget.item.isfavorite ? Colors.red : Colors.grey,
                   ),
                 ),
               ))
@@ -72,7 +81,7 @@ class ItemCard extends GetView<MyController>{
                             width: 100,
                             height: 40,
                             child: Text(
-                              item.name,
+                              widget.item.name,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: sizeText,
@@ -91,13 +100,13 @@ class ItemCard extends GetView<MyController>{
                                 color: const Color.fromARGB(61, 255, 19, 2)),
                             child: const Center(
                                 child: Text(
-                              'Offer %',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 0, 0),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )),
+                                  'Offer %',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 0, 0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                )),
                           )
                         ],
                       ),
@@ -112,7 +121,7 @@ class ItemCard extends GetView<MyController>{
                         const SizedBox(
                           width: 5,
                         ),
-                        Text('${item.timeTake} Min'),
+                        Text('${widget.item.timeTake} Min'),
                         const SizedBox(
                           width: 10,
                         ),
@@ -128,7 +137,7 @@ class ItemCard extends GetView<MyController>{
                         const SizedBox(
                           width: 5,
                         ),
-                        Text(item.deliveryFee)
+                        Text(widget.item.deliveryFee)
                       ]),
                       const SizedBox(
                         height: 5,
@@ -138,7 +147,7 @@ class ItemCard extends GetView<MyController>{
             ),
             OutlinedButton(
                 onPressed: () {
-                  launchUrlString('tel:${item.phonenum}');
+                  launchUrlString('tel:${widget.item.phonenum}');
                 },
                 style: OutlinedButton.styleFrom(
                     minimumSize: const Size(90, 38),
@@ -152,3 +161,4 @@ class ItemCard extends GetView<MyController>{
     );
   }
 }
+
